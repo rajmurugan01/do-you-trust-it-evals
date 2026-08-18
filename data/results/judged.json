@@ -1,0 +1,178 @@
+[
+  {
+    "slug": "agentcore-memory-read-after-write",
+    "title": "Field Notes: The AgentCore Memory write that returns success and reads back empty",
+    "summary": "# Summary\n\nThe author discovered two operational gotchas when implementing long-term memory in Amazon Bedrock AgentCore: a non-existent API method that passed code review despite never being called, and a critical read-after-write consistency issue where `BatchCreateMemoryRecords` returns `201` but the record remains unsearchable in its namespace for 15-30 seconds. The post provides practical guidance on verifying actual SDK operations, understanding the two-tier memory architecture, and building robust read patterns that account for eventual consistency rather than relying on fixed delays.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 5,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures the two main issues (non-existent API and read-after-write delay of 15-30 seconds), correctly identifies the operation name BatchCreateMemoryRecords, and reflects the practical guidance theme without adding unsupported claims."
+  },
+  {
+    "slug": "agents-need-a-harness",
+    "title": "Every dashboard was green while the agent burned six figures a year",
+    "summary": "# Summary\n\nThis post describes a costly failure mode where an AI agent ran in an infinite loop for days while returning successful responses, remaining invisible to standard monitoring. The author explains five specific conditions that cause agent runaways (context bloat, unsatisfiable goals, model regeneration, broken tools, and external re-drives) and recommends both hard operational bounds on loop iterations and custom instrumentation to catch these failures\u2014particularly per-session metrics that would surface a single stuck session against normal baselines.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 5,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures the main failure mode (invisible runaway loop with green dashboards), correctly lists all five runaway conditions from the source, and faithfully represents the dual solution of hard bounds plus per-session monitoring without adding unsupported claims."
+  },
+  {
+    "slug": "llm-is-not-a-security-boundary",
+    "title": "The LLM is not a security boundary",
+    "summary": "This post explains how to architect an AI agent system handling sensitive data by treating the language model as fundamentally untrustworthy and building deterministic security controls outside the model itself. The author argues that no single control is flawless, so the solution is layered defense-in-depth with ranked, load-bearing deterministic controls closest to the data and probabilistic safeguards as a backstop. The post details specific implementation patterns for identity verification, ACL filtering at retrieval time, tool allowlisting, and query validation to prevent both accidental model errors and prompt injection attacks from compromised data.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 5,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures the post's core thesis about treating the LLM as untrusted, the layered defense approach with ranked deterministic controls, and correctly identifies the specific implementation patterns (identity verification, ACL filtering, tool allowlisting, query validation) and threat modes (accidental errors and prompt injection) discussed in the source."
+  },
+  {
+    "slug": "llm-security-diagram-wrong-layer",
+    "title": "Your LLM security diagram defends the wrong layer",
+    "summary": "# Summary\n\nThe standard LLM security diagram showing four attack types (prompt injection, retrieval poisoning, context poisoning, output injection) with mitigations at each stage is misleading because it treats these as separate threats requiring probabilistic classifiers at each layer\u2014an approach that creates \"four leaky nets stacked on top of each other\" rather than a real boundary. The author argues that effective defense requires moving security enforcement to a deterministic layer where the system validates proposed actions against a finite, enumerable set of allowed operations (tools, tables, entitlements, destinations) keyed to a verified principal, treating input/output classifiers as backstops rather than primary controls.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 5,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures the post's central argument about the standard diagram's misleading approach and the correct placement of security controls at the deterministic action boundary, with all claims directly supported by the source text."
+  },
+  {
+    "slug": "part-1-aws-devops-agent-intent-vs-state",
+    "title": "Part 1: Intent vs State. How AWS DevOps Agent Closes the Gap Between What Your System Is and What You Decided It Should Be",
+    "summary": "# Summary\n\nThis post introduces a framework for closing a gap in AI-powered incident response: while current tools excel at analyzing system state (logs, metrics, traces), they miss organizational intent (ADRs, runbooks, decisions). The author describes an architecture using AWS DevOps Agent with a custom MCP server that retrieves organizational decisions from a knowledge base, enabling agents to correlate telemetry with documented commitments\u2014like identifying when an incident stems from a missed deadline rather than a recent code change. The series will walk through building this system, starting with the conceptual framing and progressing to implementation details.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 5,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures the main thesis (gap between state and intent analysis), the core architecture (AWS DevOps Agent + custom MCP server + knowledge base), and the concrete example (missed deadline incidents), all directly supported by the source."
+  },
+  {
+    "slug": "part-1-why-bedrock-agentcore",
+    "title": "Part 1: Why I Chose Amazon Bedrock AgentCore (And What Lambda Gets Wrong for AI Agents)",
+    "summary": "# Summary\n\nThis post explains why the author chose Amazon Bedrock AgentCore over Lambda for building a production AI agent, detailing how Lambda's limitations (15-minute timeout, stateless design, session management complexity, VPC cold starts) make it unsuitable for conversational AI workloads. AgentCore is a managed container orchestrator that handles session routing, memory persistence, and streaming natively, though it requires understanding its session model and has less mature tooling than Lambda. The author outlines a six-part series documenting the full production setup, from architecture decisions through cost optimization, with a companion demo repository.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 5,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures the main argument (AgentCore vs Lambda), correctly identifies the four Lambda limitations mentioned, accurately describes AgentCore's capabilities, acknowledges the trade-offs, and correctly references the six-part series structure and demo repository."
+  },
+  {
+    "slug": "part-2-aws-devops-agent-mcp-layer",
+    "title": "Part 2: The MCP Server: Turning ADRs and Incidents into a Queryable Org-Knowledge Surface",
+    "summary": "# Summary\n\nThis post explains how the author built an MCP server to give a DevOps agent access to organizational intent through a typed query layer over documented decisions, rather than embedding all context in the system prompt. The MCP exposes four tools that query a Bedrock Knowledge Base containing ADRs and other decision documents, with structured frontmatter fields enabling deterministic filtering on metadata like expiration dates and service ownership. The design prioritizes structured outputs and exact filters over semantic search alone, ensuring the agent cites specific, verifiable information rather than paraphrasing.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 5,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures the main point (MCP as typed query layer vs prompt-stuffing), the key technical detail (four tools querying Bedrock KB), and the critical design principle (structured frontmatter enabling deterministic filtering), all directly supported by the source."
+  },
+  {
+    "slug": "part-2-cdk-infrastructure-bedrock-agentcore",
+    "title": "Part 2: CDK Infrastructure for Amazon Bedrock AgentCore (And Every Gotcha You'll Hit)",
+    "summary": "# Summary\n\nThis post documents nine specific pitfalls when deploying AWS AgentCore using CDK, including naming restrictions (no hyphens), ECR repository timing issues, missing CDK constructs for logging configuration, VPC endpoint conflicts, KMS key policy requirements, security group rule representation in tests, mandatory parameters for runtime updates, Memory resource rollback failures, and array matching order sensitivity in CDK assertions. The author provides code examples and recovery procedures for each gotcha, along with a testing strategy using snapshot tests and targeted assertions.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 5,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures all nine gotchas mentioned in the source, correctly describes them as pitfalls/traps in AgentCore CDK deployment, and accurately notes the inclusion of code examples, recovery procedures, and testing strategy."
+  },
+  {
+    "slug": "part-3-aws-devops-agent-wiring-cdk",
+    "title": "Part 3: Wiring It Into AWS DevOps Agent: AgentSpace, register-service, and the IAM Trust Policy That Ate My Afternoon",
+    "summary": "# Summary\n\nThis post walks through integrating an MCP Lambda with AWS DevOps Agent using CDK, focusing on the IAM and deployment challenges. The author demonstrates a three-stack architecture (KnowledgeBase, MCP Server, DevOps Agent) and highlights three non-obvious IAM gotchas encountered during implementation, plus a production OIDC issue discovered while deploying the blog post itself.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 4,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures the main focus (integrating MCP Lambda with AWS DevOps Agent via CDK, IAM challenges, three-stack architecture, and three gotchas plus OIDC issue) without adding unsupported claims, though it could mention the post is Part 3 of a series for fuller context."
+  },
+  {
+    "slug": "part-3-strands-agent-sdk",
+    "title": "Part 3: Building the AI Agent with Strands Agents SDK, Prompt Caching, and AgentCore Memory",
+    "summary": "# Summary\n\nThis post details building a Python agent application that runs within the CDK infrastructure, using the Strands Agents SDK to create a Bedrock-backed reasoning loop with AgentCore Memory integration and Bedrock Guardrails. The author explains why Strands was chosen over LangChain (AWS-native design, simpler tool definitions, active development alignment with AgentCore), covers the dual-model strategy using Claude Sonnet 4.5 for primary conversations and Amazon Nova Pro for background tasks, and highlights prompt caching as a major cost optimization that achieves 90% savings on cached tokens. The implementation includes tool definitions as decorated functions, AgentCore Memory for persistent context across sessions, adaptive retry configuration for handling Bedrock throttling, and a streaming agent loop that forwards responses via Server-Sent Events while storing conversation turns in memory.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 5,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures all major points from the source including the Strands vs LangChain comparison, dual-model strategy, prompt caching savings (90% on cached tokens), tool definitions, AgentCore Memory integration, adaptive retry config, and streaming implementation, with no unsupported claims."
+  },
+  {
+    "slug": "part-4-local-dev-docker",
+    "title": "Part 4: Running Your AgentCore Agent Locally with Docker (The Right Way)",
+    "summary": "# Summary\n\nThis post explains how to locally test a Docker-based agent before deploying to Amazon Bedrock AgentCore, emphasizing the critical requirement to build with `--platform linux/amd64` to ensure compatibility with AgentCore's x86_64-only runtime. It covers the Dockerfile setup, environment configuration via `.env.local`, running the container with AWS credentials mounted, and testing the health check and invoke endpoints with curl, while noting that Apple Silicon Macs will experience slower builds due to QEMU emulation.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 5,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures the main point (platform requirement for AgentCore compatibility), key technical details (x86_64-only runtime, .env.local configuration, AWS credentials mounting), and the specific consequence mentioned (QEMU emulation slowness on Apple Silicon), all of which are directly supported by the source."
+  },
+  {
+    "slug": "part-5-cicd-github-actions-oidc",
+    "title": "Part 5: CI/CD for Bedrock AgentCore with GitHub Actions and AWS OIDC (No Stored Credentials)",
+    "summary": "# Summary\n\nThis post explains why OIDC is superior to stored AWS access keys for GitHub Actions CI/CD and provides a complete setup guide. It covers creating an IAM OIDC provider, configuring trust policies scoped to specific repositories, building and pushing Docker images with dual tags for easy rollback, and integrating with AWS Bedrock AgentCore for automated deployments with multi-environment promotion support.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 5,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures the main points (OIDC superiority, setup steps, dual-tag strategy, AgentCore integration, multi-environment support) with all claims directly supported by the source text."
+  },
+  {
+    "slug": "part-6-cost-performance-prompt-caching",
+    "title": "Part 6: Cost & Performance for Bedrock AgentCore: Prompt Caching, Model Selection, and CloudWatch Alarms",
+    "summary": "# Summary\n\nThis post covers cost optimization strategies for production AgentCore deployments on AWS, emphasizing that Bedrock model invocations are the dominant cost driver. The author details how prompt caching (caching system prompts and tool definitions) can save approximately $480/month on a moderately-used system, and recommends using cheaper models like Amazon Nova Pro for classification and summarization tasks instead of Claude Sonnet 4.5 for everything. The post also provides CloudWatch alarms to catch runaway costs, lifecycle configuration guidance, and estimates total monthly costs at $150-240 for a 500-conversation-per-day agent.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 5,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures the main points about cost optimization, prompt caching savings ($480/month), model selection strategy (Nova Pro vs Claude Sonnet 4.5), CloudWatch alarms, and the $150-240 monthly cost estimate for 500 conversations/day, all directly supported by the source."
+  },
+  {
+    "slug": "prompt-caching-bedrock-strands",
+    "title": "Field Notes: Turning prompt caching on for a production Bedrock workload",
+    "summary": "# Summary\n\nThis post explains how to enable and verify prompt caching in AWS Bedrock's `BedrockModel`, a feature that reduces costs by caching system prompts and tool registries. The author reveals that caching is disabled by default despite being available via two kwargs, documents a per-model gotcha where Amazon Nova rejects tool caching while Anthropic models accept it, and provides a measurement technique using the per-call `usage` block to verify cache hits in seconds rather than waiting for CloudWatch metrics. Measured results show hit ratios of 99.9% on Nova Pro and 99.8% on Sonnet 4.6, translating to 55% and 78% billing reductions respectively on system-prefix tokens.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 5,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures all key claims from the source: the two kwargs for enabling caching, the Nova/Anthropic gotcha, the per-call usage block measurement technique, and the specific measured hit ratios and billing reductions, all directly supported by the source text."
+  },
+  {
+    "slug": "three-things-bedrock-workload",
+    "title": "Field Notes: Three things I learned diagnosing a production Bedrock workload",
+    "summary": "# Summary\n\nThis post documents three production lessons from diagnosing an AWS Bedrock AI workload: load tests can mask throttling exceptions invisible to higher-level metrics, latency decomposition reveals that time-to-first-token accounts for significant delays beyond model generation speed, and prompt caching is rarely enabled despite being a simple configuration change that dramatically reduces costs. The author provides specific CloudWatch metrics and measurements to support each lesson and explains how to detect and fix each issue.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 5,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures all three main lessons with their key technical details (throttling exceptions, TTFT vs generation time, prompt caching configuration), correctly represents them as production findings from AWS Bedrock diagnostics, and accurately conveys the author's recommendation to use specific CloudWatch metrics for detection."
+  },
+  {
+    "slug": "year-10-study-system-production-ai-failure-modes",
+    "title": "What a Year 10 study system taught me about production AI failure modes",
+    "summary": "# Summary\n\nThe author built a tutoring system for his son using Claude projects and Cowork, iterating through three versions before arriving at a working architecture that aggregates weekly tutoring sessions into differentiated emails for different stakeholders. The key insight was inverting the data flow from pull-based (reading project chats) to push-based (having projects emit session summaries to Gmail) after discovering the initial design's assumptions about API capabilities were incorrect. The five lessons\u2014verify primitives before designing, prefer push over pull architectures, embrace human-in-the-loop workflows, use calibration windows before full deployment, and maintain decision logs\u2014apply directly to production AWS AI work and represent stack-agnostic architectural disciplines that determine whether AI agents succeed or fail in enterprise settings.",
+    "judge_model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "faithfulness": 5,
+    "completeness": 5,
+    "hallucinations": [],
+    "verdict": "PASS",
+    "reasoning": "The summary accurately captures the main narrative (three iterations, architecture pivot from pull to push, five lessons), includes key concrete details (Claude projects, Cowork, Gmail integration, differentiated emails), and every claim is directly supported by the source text without generalization or distortion."
+  }
+]

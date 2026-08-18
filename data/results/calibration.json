@@ -1,0 +1,65 @@
+[
+  {
+    "slug": "three-things-bedrock-workload",
+    "injection_type": "fabricated exact number",
+    "injected_claim": "throttling exceptions masked for 45 minutes (invented duration, not in source)",
+    "corrupted_summary": "This post documents three production lessons from diagnosing an AWS Bedrock AI workload: load tests masked throttling exceptions for 45 minutes before they became visible in CloudWatch, latency decomposition reveals that time-to-first-token accounts for significant delays beyond model generation speed, and prompt caching is rarely enabled despite being a simple configuration change that dramatically reduces costs.",
+    "judge_verdict": "FAIL",
+    "judge_hallucinations": [
+      "load tests masked throttling exceptions for 45 minutes before they became visible in CloudWatch",
+      "time-to-first-token accounts for significant delays beyond model generation speed"
+    ],
+    "judge_reasoning": "The summary invents a '45 minutes' timeframe not present in the source (which mentions '45 seconds' for p95 latency, not throttling visibility time), and mischaracterizes TTFT as causing 'significant delays beyond model generation speed' when the source shows TTFT is a component of total latency, not something beyond it.",
+    "caught": true
+  },
+  {
+    "slug": "agents-need-a-harness",
+    "injection_type": "modality broadening (conditional source claim stated as universal law)",
+    "injected_claim": "'every production AI agent will eventually run away' (source describes five specific trigger conditions, not an inevitability claim)",
+    "corrupted_summary": "This post describes a costly failure mode where an AI agent ran in an infinite loop for days while returning successful responses, remaining invisible to standard monitoring. The author proves that every production AI agent will eventually run away without a hard iteration bound, and recommends custom instrumentation to catch these failures.",
+    "judge_verdict": "FAIL",
+    "judge_hallucinations": [
+      "proves that every production AI agent will eventually run away",
+      "without a hard iteration bound"
+    ],
+    "judge_reasoning": "The summary claims the author 'proves' something universal about 'every production AI agent' when the source only describes one specific failure and recommends defenses, never making such a universal proof or claim.",
+    "caught": true
+  },
+  {
+    "slug": "part-6-cost-performance-prompt-caching",
+    "injection_type": "misattributed real number (correct figure, wrong source post)",
+    "injected_claim": "'99.9% hit ratio / 78% billing reduction' (these numbers are real, but measured in a different post, prompt-caching-bedrock-strands, not this one)",
+    "corrupted_summary": "This post covers cost optimization strategies for production AgentCore deployments on AWS, emphasizing that Bedrock model invocations are the dominant cost driver. The author measures a 99.9% prompt-cache hit ratio and a 78% billing reduction on system-prefix tokens, and recommends using cheaper models like Amazon Nova Pro for classification and summarization tasks instead of Claude Sonnet 4.5 for everything.",
+    "judge_verdict": "FAIL",
+    "judge_hallucinations": [
+      "99.9% prompt-cache hit ratio",
+      "78% billing reduction on system-prefix tokens"
+    ],
+    "judge_reasoning": "The summary contains two specific numerical claims (99.9% hit ratio and 78% reduction) that do not appear anywhere in the source text, which is a critical faithfulness violation.",
+    "caught": true
+  },
+  {
+    "slug": "llm-is-not-a-security-boundary",
+    "injection_type": "fabricated named entity",
+    "injected_claim": "'Okta' and its zero-trust agent products (never mentioned in source)",
+    "corrupted_summary": "This post explains how to architect an AI agent system handling sensitive data by treating the language model as fundamentally untrustworthy and building deterministic security controls outside the model, illustrated with a comparison to how Okta implements zero-trust policy enforcement in its own agent products.",
+    "judge_verdict": "FAIL",
+    "judge_hallucinations": [
+      "illustrated with a comparison to how Okta implements zero-trust policy enforcement in its own agent products"
+    ],
+    "judge_reasoning": "The summary invents a comparison to Okta that does not exist anywhere in the source, which is a major hallucination that fails the faithfulness test.",
+    "caught": true
+  },
+  {
+    "slug": "part-2-cdk-infrastructure-bedrock-agentcore",
+    "injection_type": "count inflation",
+    "injected_claim": "'twelve' pitfalls (source documents exactly nine)",
+    "corrupted_summary": "This post documents twelve specific pitfalls when deploying AWS AgentCore using CDK, including naming restrictions (no hyphens), ECR repository timing issues, and missing CDK constructs for logging configuration. The author provides code examples and recovery procedures for each gotcha.",
+    "judge_verdict": "FAIL",
+    "judge_hallucinations": [
+      "twelve specific pitfalls"
+    ],
+    "judge_reasoning": "The summary claims 'twelve specific pitfalls' but the source explicitly states '9 specific traps' in the introduction and labels gotchas #1-9 throughout.",
+    "caught": true
+  }
+]
