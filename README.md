@@ -60,22 +60,35 @@ doesn't tell you whether the judge is *stable*: whether grading the exact same, 
 twice gives you the same answer. Published research on LLM-as-judge setups documents real drift
 here, e.g. Lau, ["Same Input, Different Scores: A Multi Model Study on the Inconsistency of LLM
 Judge"](https://arxiv.org/abs/2603.04417) (2026), which found substantial score variability across
-models even at temperature 0, and other work in the same space describes judges whose internal
-grading threshold wanders across a batch.
+models even at temperature 0, with completeness scoring showing the largest fluctuations of the
+metrics tested.
 
-So the round-1 baseline summary for `three-things-bedrock-workload`, completely unmodified, went
-back through the same judge four more times, temperature 0. Verdict PASS and faithfulness=5, all
-four times. Stable, on this input, on this judge, in this run.
+A clean input repeating cleanly is the least informative thing to test, so this checks two inputs,
+not one: the round-1 baseline summary for `three-things-bedrock-workload` (unmodified, already
+passing), and the round-2 corrupted case for `agents-need-a-harness` (the modality-broadening one,
+a genuinely borderline call). Each went back through the same judge four more times, temperature 0,
+tracking both faithfulness and completeness this time, since that's the metric the cited paper
+flags as shakiest.
+
+| Input | Verdict (4 runs) | Faithfulness (4 runs) | Completeness (4 runs) |
+|---|---|---|---|
+| Easy (round-1 clean baseline) | PASS ×4 | 5, 5, 5, 5 | 5, 5, 5, 5 |
+| Hard (round-2 corrupted, modality broadening) | FAIL ×4 | 2, 2, 2, 2 | 3, 3, 3, 3 |
+
+Both stable, on both inputs, on this judge, on this day, on the metric the paper says wobbles most.
 
 ## Why this matters for evals in production
 
 A judge that passes a clean baseline hasn't been calibrated, it's been flattered. Calibrating it
 means testing it against known-bad inputs across more than one failure category (a fabricated fact,
 a scope-broadened claim, a misattributed-but-real number, an invented entity, an inflated count all
-fail differently), and testing whether it holds the same grade on an unmodified input run twice. On
-this small experiment, the judge passed both bars. Published research says that's not guaranteed to
-generalise to other models, prompts, or batch sizes, so re-run your own version of rounds 2 and 3
-before wiring an LLM judge into anything that blocks a deploy.
+fail differently), and testing whether it holds the same grade, including completeness, on repeated
+runs of both an easy and a hard input. On this small experiment, the judge passed all three bars.
+Published research says that's not guaranteed to generalise to other models, prompts, or batch
+sizes, so re-run your own version of rounds 2 and 3 before wiring an LLM judge into anything that
+blocks a deploy. And note what this doesn't test: every Round 2 injection is a benign, accidental
+error, not an adversarial one. Whether the judge (or the summarizer feeding it) can be manipulated
+by adversarial content in the source document is a different, harder experiment.
 
 ## Reproduce it
 

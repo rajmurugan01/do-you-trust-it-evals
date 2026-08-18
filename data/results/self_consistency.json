@@ -1,38 +1,88 @@
 {
-  "slug": "three-things-bedrock-workload",
-  "summary": "# Summary\n\nThis post documents three production lessons from diagnosing an AWS Bedrock AI workload: load tests can mask throttling exceptions invisible to higher-level metrics, latency decomposition reveals that time-to-first-token accounts for significant delays beyond model generation speed, and prompt caching is rarely enabled despite being a simple configuration change that dramatically reduces costs. The author provides specific CloudWatch metrics and measurements to support each lesson and explains how to detect and fix each issue.",
-  "runs": [
-    {
-      "run": 1,
-      "faithfulness": 5,
-      "completeness": 5,
-      "hallucinations": [],
-      "verdict": "PASS",
-      "reasoning": "The summary accurately captures all three main lessons with their key technical details (throttling exceptions, TTFT vs generation time, prompt caching configuration), correctly represents them as production findings from AWS Bedrock diagnostics, and accurately conveys that CloudWatch metrics and measurements support the lessons."
-    },
-    {
-      "run": 2,
-      "faithfulness": 5,
-      "completeness": 5,
-      "hallucinations": [],
-      "verdict": "PASS",
-      "reasoning": "The summary accurately captures all three main lessons with their key technical details (throttling exceptions, TTFT vs generation time, prompt caching configuration), correctly represents them as production findings from AWS Bedrock diagnostics, and accurately conveys the author's recommendation to use specific CloudWatch metrics for detection."
-    },
-    {
-      "run": 3,
-      "faithfulness": 5,
-      "completeness": 5,
-      "hallucinations": [],
-      "verdict": "PASS",
-      "reasoning": "The summary accurately captures all three main lessons with their key technical details (throttling exceptions, TTFT vs generation time, prompt caching configuration), correctly represents them as production findings from AWS Bedrock diagnostics, and accurately conveys the author's recommendation to use specific CloudWatch metrics for detection."
-    },
-    {
-      "run": 4,
-      "faithfulness": 5,
-      "completeness": 5,
-      "hallucinations": [],
-      "verdict": "PASS",
-      "reasoning": "The summary accurately captures all three main lessons with their key technical details (throttling exceptions, TTFT vs generation time, prompt caching configuration), correctly represents them as production findings from AWS Bedrock diagnostics, and accurately conveys the author's recommendation to use specific CloudWatch metrics for detection."
-    }
-  ]
+  "easy": {
+    "slug": "three-things-bedrock-workload",
+    "note": "round-1 clean baseline",
+    "summary": "# Summary\n\nThis post documents three production lessons from diagnosing an AWS Bedrock AI workload: load tests can mask throttling exceptions invisible to higher-level metrics, latency decomposition reveals that time-to-first-token accounts for significant delays beyond model generation speed, and prompt caching is rarely enabled despite being a simple configuration change that dramatically reduces costs. The author provides specific CloudWatch metrics and measurements to support each lesson and explains how to detect and fix each issue.",
+    "runs": [
+      {
+        "run": 1,
+        "faithfulness": 5,
+        "completeness": 5,
+        "hallucinations": [],
+        "verdict": "PASS",
+        "reasoning": "The summary accurately captures all three main lessons with their key technical details (throttling exceptions, TTFT vs generation time, prompt caching configuration), correctly represents them as production findings from AWS Bedrock diagnostics, and accurately conveys the author's recommendation to use specific CloudWatch metrics, all directly supported by the source."
+      },
+      {
+        "run": 2,
+        "faithfulness": 5,
+        "completeness": 5,
+        "hallucinations": [],
+        "verdict": "PASS",
+        "reasoning": "The summary accurately captures all three main lessons with their key technical details (throttling exceptions, TTFT vs generation time, prompt caching configuration), correctly represents them as production findings from AWS Bedrock diagnostics, and accurately conveys the author's recommendation to use specific CloudWatch metrics for detection."
+      },
+      {
+        "run": 3,
+        "faithfulness": 5,
+        "completeness": 5,
+        "hallucinations": [],
+        "verdict": "PASS",
+        "reasoning": "The summary accurately captures all three main lessons with their key technical details (throttling exceptions, TTFT vs generation time, prompt caching configuration), correctly represents them as production findings from AWS Bedrock diagnostics, and accurately conveys the author's recommendation to use specific CloudWatch metrics, all directly supported by the source."
+      },
+      {
+        "run": 4,
+        "faithfulness": 5,
+        "completeness": 5,
+        "hallucinations": [],
+        "verdict": "PASS",
+        "reasoning": "The summary accurately captures all three main lessons with their key technical details (throttling exceptions, TTFT vs generation time, prompt caching configuration), correctly represents them as production findings from AWS Bedrock diagnostics, and accurately conveys the author's recommendation to use specific CloudWatch metrics for detection."
+      }
+    ]
+  },
+  "hard": {
+    "slug": "agents-need-a-harness",
+    "note": "round-2 corrupted case (modality broadening)",
+    "summary": "This post describes a costly failure mode where an AI agent ran in an infinite loop for days while returning successful responses, remaining invisible to standard monitoring. The author proves that every production AI agent will eventually run away without a hard iteration bound, and recommends both hard operational bounds on loop iterations and custom instrumentation to catch these failures\u2014particularly per-session metrics that would surface a single stuck session against normal baselines.",
+    "runs": [
+      {
+        "run": 1,
+        "faithfulness": 2,
+        "completeness": 3,
+        "hallucinations": [
+          "proves that every production AI agent will eventually run away without a hard iteration bound"
+        ],
+        "verdict": "FAIL",
+        "reasoning": "The summary claims the author 'proves' something universal about all production AI agents, but the source only describes one observed failure and recommends defenses against it, never making or proving such an absolute claim."
+      },
+      {
+        "run": 2,
+        "faithfulness": 2,
+        "completeness": 3,
+        "hallucinations": [
+          "proves that every production AI agent will eventually run away without a hard iteration bound"
+        ],
+        "verdict": "FAIL",
+        "reasoning": "The summary claims the author 'proves' something universal about all production AI agents, but the source only describes one observed failure and recommends defenses against it, never making or proving such an absolute claim."
+      },
+      {
+        "run": 3,
+        "faithfulness": 2,
+        "completeness": 3,
+        "hallucinations": [
+          "proves that every production AI agent will eventually run away without a hard iteration bound"
+        ],
+        "verdict": "FAIL",
+        "reasoning": "The summary claims the author 'proves' something universal about all production AI agents, but the source only describes one observed failure and recommends defenses against it, never making or proving such an absolute claim."
+      },
+      {
+        "run": 4,
+        "faithfulness": 2,
+        "completeness": 3,
+        "hallucinations": [
+          "proves that every production AI agent will eventually run away without a hard iteration bound"
+        ],
+        "verdict": "FAIL",
+        "reasoning": "The summary claims the author 'proves' something universal about all production AI agents, but the source only describes one observed failure and recommends defenses against it, never making or proving such an absolute claim."
+      }
+    ]
+  }
 }
