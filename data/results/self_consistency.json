@@ -1,0 +1,38 @@
+{
+  "slug": "three-things-bedrock-workload",
+  "summary": "# Summary\n\nThis post documents three production lessons from diagnosing an AWS Bedrock AI workload: load tests can mask throttling exceptions invisible to higher-level metrics, latency decomposition reveals that time-to-first-token accounts for significant delays beyond model generation speed, and prompt caching is rarely enabled despite being a simple configuration change that dramatically reduces costs. The author provides specific CloudWatch metrics and measurements to support each lesson and explains how to detect and fix each issue.",
+  "runs": [
+    {
+      "run": 1,
+      "faithfulness": 5,
+      "completeness": 5,
+      "hallucinations": [],
+      "verdict": "PASS",
+      "reasoning": "The summary accurately captures all three main lessons with their key technical details (throttling exceptions, TTFT vs generation time, prompt caching configuration), correctly represents them as production findings from AWS Bedrock diagnostics, and accurately conveys that CloudWatch metrics and measurements support the lessons."
+    },
+    {
+      "run": 2,
+      "faithfulness": 5,
+      "completeness": 5,
+      "hallucinations": [],
+      "verdict": "PASS",
+      "reasoning": "The summary accurately captures all three main lessons with their key technical details (throttling exceptions, TTFT vs generation time, prompt caching configuration), correctly represents them as production findings from AWS Bedrock diagnostics, and accurately conveys the author's recommendation to use specific CloudWatch metrics for detection."
+    },
+    {
+      "run": 3,
+      "faithfulness": 5,
+      "completeness": 5,
+      "hallucinations": [],
+      "verdict": "PASS",
+      "reasoning": "The summary accurately captures all three main lessons with their key technical details (throttling exceptions, TTFT vs generation time, prompt caching configuration), correctly represents them as production findings from AWS Bedrock diagnostics, and accurately conveys the author's recommendation to use specific CloudWatch metrics for detection."
+    },
+    {
+      "run": 4,
+      "faithfulness": 5,
+      "completeness": 5,
+      "hallucinations": [],
+      "verdict": "PASS",
+      "reasoning": "The summary accurately captures all three main lessons with their key technical details (throttling exceptions, TTFT vs generation time, prompt caching configuration), correctly represents them as production findings from AWS Bedrock diagnostics, and accurately conveys the author's recommendation to use specific CloudWatch metrics for detection."
+    }
+  ]
+}

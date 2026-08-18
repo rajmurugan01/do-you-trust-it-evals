@@ -39,68 +39,96 @@ Respond with ONLY a JSON object, no prose, no markdown fences, in this exact sha
 "PASS"|"FAIL", "reasoning": "<one sentence>"}
 """
 
-# Each case: a real post + a hand-corrupted summary, one distinct injection type each.
+# Each case is a SINGLE-VARIABLE edit of the real round-1 baseline summary: every word of the
+# original is preserved byte-for-byte except the one injected error. This matters - an earlier
+# pass at these cases also trimmed/reworded unrelated parts of the summary at the same time,
+# which meant a FAIL verdict couldn't be attributed to the injected error alone. Fixed here so
+# each case tests exactly one thing.
 CASES = [
     {
         "slug": "three-things-bedrock-workload",
-        "injection_type": "fabricated exact number",
+        "injection_type": "fabricated exact number (one sentence inserted, nothing else changed)",
         "corrupted_summary": (
             "This post documents three production lessons from diagnosing an AWS Bedrock AI "
-            "workload: load tests masked throttling exceptions for 45 minutes before they became "
-            "visible in CloudWatch, latency decomposition reveals that time-to-first-token "
-            "accounts for significant delays beyond model generation speed, and prompt caching is "
-            "rarely enabled despite being a simple configuration change that dramatically reduces "
-            "costs."
+            "workload: load tests can mask throttling exceptions invisible to higher-level "
+            "metrics, latency decomposition reveals that time-to-first-token accounts for "
+            "significant delays beyond model generation speed, and prompt caching is rarely "
+            "enabled despite being a simple configuration change that dramatically reduces costs. "
+            "The throttling stayed invisible for approximately 45 minutes before the load test "
+            "surfaced it. The author provides specific CloudWatch metrics and measurements to "
+            "support each lesson and explains how to detect and fix each issue."
         ),
-        "injected_claim": "throttling exceptions masked for 45 minutes (invented duration, not in source)",
+        "injected_claim": "'invisible for approximately 45 minutes' (single inserted sentence; every "
+        "other word is byte-identical to the round-1 baseline summary)",
     },
     {
         "slug": "agents-need-a-harness",
-        "injection_type": "modality broadening (conditional source claim stated as universal law)",
+        "injection_type": "modality broadening (one clause replaced, nothing else changed)",
         "corrupted_summary": (
             "This post describes a costly failure mode where an AI agent ran in an infinite loop "
             "for days while returning successful responses, remaining invisible to standard "
             "monitoring. The author proves that every production AI agent will eventually run away "
-            "without a hard iteration bound, and recommends custom instrumentation to catch these "
-            "failures."
+            "without a hard iteration bound, and recommends both hard operational bounds on loop "
+            "iterations and custom instrumentation to catch these failures—particularly "
+            "per-session metrics that would surface a single stuck session against normal "
+            "baselines."
         ),
-        "injected_claim": "'every production AI agent will eventually run away' (source describes five "
-        "specific trigger conditions, not an inevitability claim)",
+        "injected_claim": "'proves that every production AI agent will eventually run away' replacing "
+        "only the 'five specific conditions' clause; source describes five specific trigger "
+        "conditions, not an inevitability claim; every other clause is byte-identical to round 1",
     },
     {
         "slug": "part-6-cost-performance-prompt-caching",
-        "injection_type": "misattributed real number (correct figure, wrong source post)",
+        "injection_type": "misattributed real number (one clause replaced, nothing else changed)",
         "corrupted_summary": (
             "This post covers cost optimization strategies for production AgentCore deployments on "
             "AWS, emphasizing that Bedrock model invocations are the dominant cost driver. The "
-            "author measures a 99.9% prompt-cache hit ratio and a 78% billing reduction on system-"
-            "prefix tokens, and recommends using cheaper models like Amazon Nova Pro for "
-            "classification and summarization tasks instead of Claude Sonnet 4.5 for everything."
+            "author measures a 99.9% prompt-cache hit ratio and a 78% billing reduction on "
+            "system-prefix tokens, and recommends using cheaper models like Amazon Nova Pro for "
+            "classification and summarization tasks instead of Claude Sonnet 4.5 for everything. "
+            "The post also provides CloudWatch alarms to catch runaway costs, lifecycle "
+            "configuration guidance, and estimates total monthly costs at $150-240 for a "
+            "500-conversation-per-day agent."
         ),
-        "injected_claim": "'99.9% hit ratio / 78% billing reduction' (these numbers are real, but "
-        "measured in a different post, prompt-caching-bedrock-strands, not this one)",
+        "injected_claim": "'99.9% hit ratio / 78% billing reduction' replacing only the '$480/month' "
+        "clause; these numbers are real, but measured in a different post "
+        "(prompt-caching-bedrock-strands), not this one; every other clause is byte-identical to "
+        "round 1",
     },
     {
         "slug": "llm-is-not-a-security-boundary",
-        "injection_type": "fabricated named entity",
+        "injection_type": "fabricated named entity (one sentence appended, nothing else changed)",
         "corrupted_summary": (
             "This post explains how to architect an AI agent system handling sensitive data by "
             "treating the language model as fundamentally untrustworthy and building deterministic "
-            "security controls outside the model, illustrated with a comparison to how Okta "
-            "implements zero-trust policy enforcement in its own agent products."
+            "security controls outside the model itself. The author argues that no single control "
+            "is flawless, so the solution is layered defense-in-depth with ranked, load-bearing "
+            "deterministic controls closest to the data and probabilistic safeguards as a backstop. "
+            "The post details specific implementation patterns for identity verification, ACL "
+            "filtering at retrieval time, tool allowlisting, and query validation to prevent both "
+            "accidental model errors and prompt injection attacks from compromised data, "
+            "illustrated with a comparison to how Okta implements zero-trust policy enforcement in "
+            "its own agent products."
         ),
-        "injected_claim": "'Okta' and its zero-trust agent products (never mentioned in source)",
+        "injected_claim": "'illustrated with a comparison to how Okta implements zero-trust policy "
+        "enforcement in its own agent products' appended as a trailing clause; Okta is never "
+        "mentioned in source; every other word is byte-identical to round 1",
     },
     {
         "slug": "part-2-cdk-infrastructure-bedrock-agentcore",
-        "injection_type": "count inflation",
+        "injection_type": "count inflation (one word changed, nothing else changed)",
         "corrupted_summary": (
             "This post documents twelve specific pitfalls when deploying AWS AgentCore using CDK, "
-            "including naming restrictions (no hyphens), ECR repository timing issues, and missing "
-            "CDK constructs for logging configuration. The author provides code examples and "
-            "recovery procedures for each gotcha."
+            "including naming restrictions (no hyphens), ECR repository timing issues, missing CDK "
+            "constructs for logging configuration, VPC endpoint conflicts, KMS key policy "
+            "requirements, security group rule representation in tests, mandatory parameters for "
+            "runtime updates, Memory resource rollback failures, and array matching order "
+            "sensitivity in CDK assertions. The author provides code examples and recovery "
+            "procedures for each gotcha, along with a testing strategy using snapshot tests and "
+            "targeted assertions."
         ),
-        "injected_claim": "'twelve' pitfalls (source documents exactly nine)",
+        "injected_claim": "'twelve' replacing only 'nine' (source documents exactly nine); every "
+        "other word is byte-identical to round 1",
     },
 ]
 
