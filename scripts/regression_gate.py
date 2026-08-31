@@ -36,9 +36,9 @@ from pathlib import Path
 import boto3
 
 REGION = "us-east-1"
-BASELINE_MODEL_ID = "us.anthropic.claude-haiku-4-5-20251001-v1:0"
+BASELINE_MODEL_ID = "global.anthropic.claude-haiku-4-5-20251001-v1:0"
 WEAKER_MODEL_ID = "us.amazon.nova-micro-v1:0"
-JUDGE_MODEL_ID = "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
+JUDGE_MODEL_ID = "global.anthropic.claude-sonnet-4-5-20250929-v1:0"
 
 ROOT = Path(__file__).parent.parent
 POSTS_DIR = ROOT / "data" / "posts"

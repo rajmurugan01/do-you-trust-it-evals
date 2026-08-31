@@ -12,7 +12,7 @@ from pathlib import Path
 import boto3
 
 REGION = "us-east-1"
-JUDGE_MODEL_ID = "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
+JUDGE_MODEL_ID = "global.anthropic.claude-sonnet-4-5-20250929-v1:0"
 N_RUNS = 4
 
 ROOT = Path(__file__).parent.parent

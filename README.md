@@ -13,9 +13,9 @@ sufficient.
 
 ## Setup
 
-- **Summarizer:** `us.anthropic.claude-haiku-4-5-20251001-v1:0` writes a 2-3 sentence summary of
+- **Summarizer:** `global.anthropic.claude-haiku-4-5-20251001-v1:0` writes a 2-3 sentence summary of
   each post, instructed to use only claims present in the source.
-- **Judge:** `us.anthropic.claude-sonnet-4-5-20250929-v1:0` scores each summary against its source
+- **Judge:** `global.anthropic.claude-sonnet-4-5-20250929-v1:0` scores each summary against its source
   on faithfulness (1-5), completeness (1-5), and a list of any unsupported claims, with a strict
   rubric that treats scope-broadening ("sometimes" becoming "always") as a hallucination, not just
   invented facts.

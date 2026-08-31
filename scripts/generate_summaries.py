@@ -9,7 +9,7 @@ from pathlib import Path
 import boto3
 
 REGION = "us-east-1"
-MODEL_ID = "us.anthropic.claude-haiku-4-5-20251001-v1:0"
+MODEL_ID = "global.anthropic.claude-haiku-4-5-20251001-v1:0"
 
 POSTS_DIR = Path(__file__).parent.parent / "data" / "posts"
 OUT_PATH = Path(__file__).parent.parent / "data" / "results" / "summaries.json"
