@@ -1,0 +1,302 @@
+{
+  "note": "Round 6. No new Bedrock calls: recomputed from rounds 4-5 outputs already on disk.",
+  "n_per_arm": {
+    "control": 64,
+    "prompt_regression": 64
+  },
+  "signals": {
+    "novel_numbers": {
+      "control_mean": 0.0,
+      "regression_mean": 0.0,
+      "unclustered": {
+        "n_per_arm": 64,
+        "diff": 0.0,
+        "p": 1.0
+      },
+      "clustered": {
+        "n_clusters": 16,
+        "mean_diff": 0.0,
+        "p_exact": 1.0
+      },
+      "per_cluster_diffs": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "grounding": {
+      "control_mean": 0.6933064568992144,
+      "regression_mean": 0.6747731899963911,
+      "unclustered": {
+        "n_per_arm": 64,
+        "diff": -0.01853326690282331,
+        "p": 0.21697566048679026
+      },
+      "clustered": {
+        "n_clusters": 16,
+        "mean_diff": -0.018533266902823302,
+        "p_exact": 0.344940185546875
+      },
+      "per_cluster_diffs": [
+        0.06369519996094675,
+        0.045085660526836935,
+        0.0169408186582638,
+        -0.02939211497464478,
+        -0.09431384057278658,
+        0.021529572380977413,
+        -0.11172303522226301,
+        -0.15996733666426088,
+        0.02775624912721697,
+        0.004507345354544778,
+        -0.019054787611186508,
+        -0.07924285991847968,
+        -0.026245813979715038,
+        -0.02429666060889113,
+        0.14936644401675836,
+        -0.08117711091849023
+      ]
+    },
+    "trigram_grounding": {
+      "control_mean": 0.08117641211849673,
+      "regression_mean": 0.0707998659596117,
+      "unclustered": {
+        "n_per_arm": 64,
+        "diff": -0.01037654615888503,
+        "p": 0.18183636327273456
+      },
+      "clustered": {
+        "n_clusters": 16,
+        "mean_diff": -0.010376546158885036,
+        "p_exact": 0.168060302734375
+      },
+      "per_cluster_diffs": [
+        0.010285719052040218,
+        0.002340981406082014,
+        -0.007135312531101959,
+        -0.016984170681201116,
+        -0.05119313601228735,
+        -0.022039765932954786,
+        -0.03748934631231725,
+        0.008644246049309343,
+        0.01311805521887189,
+        0.0409314546601692,
+        -0.023560856275912437,
+        0.026415629073601732,
+        -0.060651317600360494,
+        0.0009582129152673272,
+        -0.0028006120127011674,
+        -0.046864519558665746
+      ]
+    },
+    "novel_words": {
+      "control_mean": 15.9375,
+      "regression_mean": 16.90625,
+      "unclustered": {
+        "n_per_arm": 64,
+        "diff": 0.96875,
+        "p": 0.27057458850822985
+      },
+      "clustered": {
+        "n_clusters": 16,
+        "mean_diff": 0.96875,
+        "p_exact": 0.24945068359375
+      },
+      "per_cluster_diffs": [
+        -4.5,
+        1.75,
+        -2.0,
+        -0.75,
+        4.5,
+        -0.75,
+        6.5,
+        2.5,
+        0.75,
+        0.5,
+        0.5,
+        6.75,
+        2.0,
+        -2.0,
+        -2.75,
+        2.5
+      ]
+    },
+    "novel_caps": {
+      "control_mean": 0.078125,
+      "regression_mean": 0.09375,
+      "unclustered": {
+        "n_per_arm": 64,
+        "diff": 0.015625,
+        "p": 1.0
+      },
+      "clustered": {
+        "n_clusters": 16,
+        "mean_diff": 0.015625,
+        "p_exact": 1.0
+      },
+      "per_cluster_diffs": [
+        0.0,
+        0.0,
+        0.25,
+        -0.5,
+        0.0,
+        0.0,
+        0.25,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.25,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "length": {
+      "control_mean": 588.0,
+      "regression_mean": 592.203125,
+      "unclustered": {
+        "n_per_arm": 64,
+        "diff": 4.203125,
+        "p": 0.8353232935341293
+      },
+      "clustered": {
+        "n_clusters": 16,
+        "mean_diff": 4.203125,
+        "p_exact": 0.8446044921875
+      },
+      "per_cluster_diffs": [
+        -29.5,
+        100.0,
+        -32.0,
+        -60.0,
+        -36.25,
+        2.75,
+        -12.5,
+        -80.25,
+        44.75,
+        20.0,
+        -37.0,
+        144.75,
+        15.5,
+        -130.5,
+        194.5,
+        -37.0
+      ]
+    }
+  },
+  "invented_examples": [
+    {
+      "arm": "prompt_regression",
+      "repeat": 0,
+      "slug": "llm-is-not-a-security-boundary",
+      "numbers": [],
+      "caps": [
+        "LLMs"
+      ]
+    },
+    {
+      "arm": "prompt_regression",
+      "repeat": 0,
+      "slug": "part-5-cicd-github-actions-oidc",
+      "numbers": [],
+      "caps": [
+        "OpenID"
+      ]
+    },
+    {
+      "arm": "control",
+      "repeat": 1,
+      "slug": "part-3-aws-devops-agent-wiring-cdk",
+      "numbers": [],
+      "caps": [
+        "CloudFormation"
+      ]
+    },
+    {
+      "arm": "control",
+      "repeat": 1,
+      "slug": "part-5-cicd-github-actions-oidc",
+      "numbers": [],
+      "caps": [
+        "OpenID"
+      ]
+    },
+    {
+      "arm": "prompt_regression",
+      "repeat": 1,
+      "slug": "part-2-aws-devops-agent-mcp-layer",
+      "numbers": [],
+      "caps": [
+        "LLMs"
+      ]
+    },
+    {
+      "arm": "control",
+      "repeat": 2,
+      "slug": "llm-security-diagram-wrong-layer",
+      "numbers": [],
+      "caps": [
+        "ACLs"
+      ]
+    },
+    {
+      "arm": "control",
+      "repeat": 2,
+      "slug": "part-5-cicd-github-actions-oidc",
+      "numbers": [],
+      "caps": [
+        "OpenID"
+      ]
+    },
+    {
+      "arm": "prompt_regression",
+      "repeat": 2,
+      "slug": "part-5-cicd-github-actions-oidc",
+      "numbers": [],
+      "caps": [
+        "OpenID"
+      ]
+    },
+    {
+      "arm": "control",
+      "repeat": 3,
+      "slug": "llm-security-diagram-wrong-layer",
+      "numbers": [],
+      "caps": [
+        "ACLs"
+      ]
+    },
+    {
+      "arm": "prompt_regression",
+      "repeat": 3,
+      "slug": "part-3-aws-devops-agent-wiring-cdk",
+      "numbers": [],
+      "caps": [
+        "CloudFormation"
+      ]
+    },
+    {
+      "arm": "prompt_regression",
+      "repeat": 3,
+      "slug": "part-5-cicd-github-actions-oidc",
+      "numbers": [],
+      "caps": [
+        "OpenID"
+      ]
+    }
+  ]
+}
