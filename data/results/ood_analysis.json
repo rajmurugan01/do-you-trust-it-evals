@@ -1,0 +1,143 @@
+{
+  "12000": {
+    "n_total": 128,
+    "labelled": {
+      "control_fail": 0,
+      "control_n": 64,
+      "regression_fail": 1,
+      "regression_n": 64,
+      "p": 1.0
+    },
+    "unlabelled": {
+      "grounding": {
+        "control_mean": 0.6933064568992144,
+        "regression_mean": 0.6747731899963911,
+        "p_unclustered": 0.21697566048679026,
+        "p_clustered_exact": 0.344940185546875,
+        "n_clusters": 16
+      },
+      "trigram_grounding": {
+        "control_mean": 0.08117641211849673,
+        "regression_mean": 0.0707998659596117,
+        "p_unclustered": 0.18183636327273456,
+        "p_clustered_exact": 0.168060302734375,
+        "n_clusters": 16
+      },
+      "novel_words": {
+        "control_mean": 15.9375,
+        "regression_mean": 16.90625,
+        "p_unclustered": 0.27057458850822985,
+        "p_clustered_exact": 0.24945068359375,
+        "n_clusters": 16
+      },
+      "novel_numbers": {
+        "control_mean": 0.0,
+        "regression_mean": 0.0,
+        "p_unclustered": 1.0,
+        "p_clustered_exact": 1.0,
+        "n_clusters": 16
+      },
+      "novel_caps": {
+        "control_mean": 0.078125,
+        "regression_mean": 0.09375,
+        "p_unclustered": 1.0,
+        "p_clustered_exact": 1.0,
+        "n_clusters": 16
+      }
+    }
+  },
+  "2000": {
+    "n_total": 128,
+    "labelled": {
+      "control_fail": 3,
+      "control_n": 64,
+      "regression_fail": 5,
+      "regression_n": 64,
+      "p": 0.7176317322358492
+    },
+    "unlabelled": {
+      "grounding": {
+        "control_mean": 0.5685786251878694,
+        "regression_mean": 0.5405062950243374,
+        "p_unclustered": 0.09667806643867123,
+        "p_clustered_exact": 0.11456298828125,
+        "n_clusters": 16
+      },
+      "trigram_grounding": {
+        "control_mean": 0.08295859941748175,
+        "regression_mean": 0.055189346911125044,
+        "p_unclustered": 0.0018399632007359854,
+        "p_clustered_exact": 0.01995849609375,
+        "n_clusters": 16
+      },
+      "novel_words": {
+        "control_mean": 17.6875,
+        "regression_mean": 20.3125,
+        "p_unclustered": 0.012359752804943901,
+        "p_clustered_exact": 0.04315185546875,
+        "n_clusters": 16
+      },
+      "novel_numbers": {
+        "control_mean": 0.0625,
+        "regression_mean": 0.0625,
+        "p_unclustered": 1.0,
+        "p_clustered_exact": 1.0,
+        "n_clusters": 16
+      },
+      "novel_caps": {
+        "control_mean": 0.140625,
+        "regression_mean": 0.171875,
+        "p_unclustered": 0.8063838723225536,
+        "p_clustered_exact": 0.765625,
+        "n_clusters": 16
+      }
+    }
+  },
+  "600": {
+    "n_total": 128,
+    "labelled": {
+      "control_fail": 7,
+      "control_n": 64,
+      "regression_fail": 23,
+      "regression_n": 64,
+      "p": 0.0014708589137502413
+    },
+    "unlabelled": {
+      "grounding": {
+        "control_mean": 0.4189393568655244,
+        "regression_mean": 0.3778713703754129,
+        "p_unclustered": 0.04051918961620768,
+        "p_clustered_exact": 0.059722900390625,
+        "n_clusters": 16
+      },
+      "trigram_grounding": {
+        "control_mean": 0.06737906324053854,
+        "regression_mean": 0.04409191415232891,
+        "p_unclustered": 0.0030399392012159755,
+        "p_clustered_exact": 0.019287109375,
+        "n_clusters": 16
+      },
+      "novel_words": {
+        "control_mean": 20.40625,
+        "regression_mean": 30.171875,
+        "p_unclustered": 1.999960000799984e-05,
+        "p_clustered_exact": 0.000213623046875,
+        "n_clusters": 16
+      },
+      "novel_numbers": {
+        "control_mean": 0.171875,
+        "regression_mean": 0.109375,
+        "p_unclustered": 0.6112877742445151,
+        "p_clustered_exact": 0.5,
+        "n_clusters": 16
+      },
+      "novel_caps": {
+        "control_mean": 0.140625,
+        "regression_mean": 0.625,
+        "p_unclustered": 3.999920001599968e-05,
+        "p_clustered_exact": 0.001953125,
+        "n_clusters": 16
+      }
+    }
+  }
+}
